@@ -98,6 +98,14 @@ const App: React.FC = () => {
           <span className="font-medium">{toast.message}</span>
         </div>
       </div>
+{/* Ramon Ultra Visual */}
+<div className="relative flex justify-center mb-8">
+  <img
+    src="/ramon-ultra.png"
+    alt="Ramon Ultra"
+    className="w-40 h-40 rounded-full object-cover opacity-90"
+  />
+</div>
 
       <header className="mb-8 border-b border-gray-200 pb-6 flex items-center justify-between">
         <div>
