@@ -4,6 +4,58 @@ import { generateEixoNorteContent } from './geminiService';
 import { FormData, EixoNorteResponse } from './types';
 import { FIXED_FOOTER } from './constants';
 
+const LoadingOverlay: React.FC<{ show: boolean }> = ({ show }) => {
+  if (!show) return null;
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+      {/* fundo */}
+      <div className="absolute inset-0 bg-[#070B1A]/95" />
+
+      {/* pontinhos “espaciais” */}
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.25) 1px, transparent 0)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      {/* conteúdo */}
+      <div className="relative flex flex-col items-center gap-4">
+        <div className="relative">
+          {/* glow */}
+          <div className="absolute -inset-6 rounded-full bg-blue-500/25 blur-2xl animate-pulse" />
+          {/* avatar */}
+          <img
+            src="/ramon-ultra.png"
+            alt="Ramon Ultra"
+            className="relative w-28 h-28 rounded-full object-cover border border-blue-400/40"
+          />
+        </div>
+
+        <div className="text-center">
+          <div className="text-white font-extrabold tracking-[0.25em] italic">
+            RAMON <span className="text-blue-300">ULTRA</span>
+          </div>
+          <div className="mt-1 text-blue-200/70 text-xs tracking-[0.35em] uppercase">
+            Processando protocolo v5.0
+          </div>
+
+          {/* bolinhas */}
+          <div className="mt-3 flex items-center justify-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-bounce [animation-delay:-200ms]" />
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-bounce [animation-delay:-100ms]" />
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 const App: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     content: '',
@@ -91,6 +143,8 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen p-4 md:p-8 max-w-5xl mx-auto">
+<LoadingOverlay show={loading} />
+
       {/* Toast Notification */}
       <div className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${toast.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
         <div className="bg-gray-900 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3">
